@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,30 @@ class Person
      */
     private $password;
 
+    /**
+     * @var Pair
+     * @ORM\OneToMany(targetEntity="Pair", mappedBy="partner1")
+     */
+    private $pairs1;
+
+    /**
+     * @var Pair
+     * @ORM\OneToMany(targetEntity="Pair", mappedBy="partner2")
+     */
+    private $pairs2;
+
+    /**
+     * @var Cluster
+     * @ORM\OneToOne(targetEntity="Cluster", inversedBy="trainer")
+     * @ORM\JoinColumn(name="cluster_id", referencedColumnName="id")
+     */
+    private $cluster;
+
+    public function __construct()
+    {
+        $this->pairs1 = new ArrayCollection();
+        $this->pairs2 = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -154,6 +179,27 @@ class Person
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function __toString()
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
+
+    /**
+     * @return null|Cluster
+     */
+    public function getCluster()
+    {
+        return $this->cluster;
+    }
+
+    /**
+     * @param Cluster $cluster
+     */
+    public function setCluster($cluster)
+    {
+        $this->cluster = $cluster;
     }
 }
 

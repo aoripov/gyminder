@@ -39,3 +39,21 @@ services:
           tags:
               - { name: sonata.admin, manager_type: orm, label: Person }
           public: true
+    admin.gym:
+          class: AppBundle\Admin\GymAdmin
+          arguments: [~, AppBundle\Entity\Gym, ~]
+          tags:
+              - { name: sonata.admin, manager_type: orm, label: Gym }
+          public: true
+    admin.pair:
+          class: AppBundle\Admin\PairAdmin
+          arguments: [~, AppBundle\Entity\Pair, ~]
+          tags:
+              - { name: sonata.admin, manager_type: orm, label: Pair }
+          public: true
+    admin.cluster:
+          class: AppBundle\Admin\ClusterAdmin
+          arguments: [~, AppBundle\Entity\Cluster, ~]
+          tags:
+              - { name: sonata.admin, manager_type: orm, label: Cluster }
+          public: true
