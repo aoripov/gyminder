@@ -87,3 +87,6 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+
+twig:
+    form_themes: ['bootstrap_3_layout.html.twig']
