@@ -136,5 +136,10 @@ class Gym
     {
         return $this->lng;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 

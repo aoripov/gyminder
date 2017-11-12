@@ -50,6 +50,20 @@ class Cluster
 
 
     /**
+     * @var array
+     * @ORM\Column(name="weekDays", type="array")
+     */
+    private $weekDays;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time", type="datetime", nullable=true)
+     */
+    private $time;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -129,6 +143,38 @@ class Cluster
     public function setGym($gym)
     {
         $this->gym = $gym;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWeekDays()
+    {
+        return $this->weekDays;
+    }
+
+    /**
+     * @param array $weekDays
+     */
+    public function setWeekDays($weekDays)
+    {
+        $this->weekDays = $weekDays;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param \DateTime $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
     }
 }
 
