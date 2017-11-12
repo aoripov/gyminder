@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Demo Application{% endblock %}
+{% block title %}User data{% endblock %}
 
 {% block body %}
-    {% block fos_user_content %}{% endblock %}
+    {% block fos_user_content %}
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {% endblock %}
 {% endblock %}

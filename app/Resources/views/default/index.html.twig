@@ -9,7 +9,11 @@
                         <div class="col-md-7">
                             <h2>Healthy spirit in healthy body</b></h2>
                             <p>Get motivated to build discipline to stay fit and inspire others to follow you</p>
-                            <span><a class="btn btn-primary" href="#">Join today</a></span>
+                            {% if app.user %}
+                            {% else %}
+                                <span><a class="btn btn-primary" href="#">Join today</a></span>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>

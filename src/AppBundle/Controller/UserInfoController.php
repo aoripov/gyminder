@@ -3,8 +3,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Cluster;
 use AppBundle\Entity\Gym;
+use AppBundle\Entity\Pair;
+use AppBundle\Entity\Person;
 use AppBundle\Form\GymType;
-    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use  Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -129,6 +131,43 @@ class UserInfoController extends Controller
             $manager->flush();
 
             $this->addFlash('success', 'Group was successfully created');
+            return $this->redirect('/');
+        }
+
+        return $this->render('default/updateInfo.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/addPair", name="add_pair")
+     * @Security("is_authenticated()")
+     */
+    public function addPairAction(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $pair= new Pair();
+        $pair->setPartner1($this->getUser());
+
+        $partners = $this->getDoctrine()->getRepository(Person::class)->findAll();
+
+        $form = $this->createFormBuilder($pair)
+            ->add('partner2', EntityType::class, [
+                'class' => Person::class,
+                'choices' => $partners,
+                'label' => 'Gym partner search'
+            ])
+            ->add('save', SubmitType::class, array('label' => 'Send request'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pair = $form->getData();
+            $manager->persist($pair);
+            $manager->flush();
+
+            $this->addFlash('success', 'Request sent');
             return $this->redirect('/');
         }
 
