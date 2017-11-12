@@ -39,20 +39,20 @@ class Person extends BaseUser
 
     /**
      * @var Pair
-     * @ORM\OneToMany(targetEntity="Pair", mappedBy="partner1")
+     * @ORM\OneToMany(targetEntity="Pair", mappedBy="partner1", nullable=true)
      */
     protected $pairs1;
 
     /**
      * @var Pair
-     * @ORM\OneToMany(targetEntity="Pair", mappedBy="partner2")
+     * @ORM\OneToMany(targetEntity="Pair", mappedBy="partner2", nullable=true)
      */
     protected $pairs2;
 
     /**
      * @var Cluster
      * @ORM\OneToOne(targetEntity="Cluster", inversedBy="trainer")
-     * @ORM\JoinColumn(name="cluster_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="cluster_id", referencedColumnName="id", nullable=true)
      */
     protected $cluster;
 
